@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mercado Du Povo</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f5f5f5;
+    color:#222;
+}
+
+header{
+    background:#0b7a3b;
+    color:white;
+    padding:18px 16px;
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+.topo{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    font-size:22px;
+    font-weight:bold;
+}
+
+.carrinho{
+    background:white;
+    color:#0b7a3b;
+    border:0;
+    border-radius:20px;
+    padding:9px 14px;
+    font-weight:bold;
+}
+
+.banner{
+    background:#ffd600;
+    padding:22px 16px;
+}
+
+.banner h1{
+    font-size:25px;
+    margin-bottom:6px;
+}
+
+.banner p{
+    font-size:15px;
+}
+
+.container{
+    padding:18px 14px;
+    max-width:900px;
+    margin:auto;
+}
+
+h2{
+    margin-bottom:12px;
+}
+
+.categorias{
+    display:flex;
+    gap:10px;
+    overflow-x:auto;
+    padding-bottom:12px;
+}
+
+.categoria{
+    background:white;
+    border:1px solid #ddd;
+    border-radius:20px;
+    padding:9px 15px;
+    white-space:nowrap;
+}
+
+.produtos{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.produto{
+    background:white;
+    border-radius:12px;
+    padding:14px;
+    box-shadow:0 2px 6px rgba(0,0,0,.08);
+}
+
+.imagem{
+    height:110px;
+    background:#eee;
+    border-radius:8px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:42px;
+    margin-bottom:10px;
+}
+
+.nome{
+    font-weight:bold;
+    margin-bottom:5px;
+}
+
+.unidade{
+    color:#777;
+    font-size:13px;
+}
+
+.preco{
+    color:#0b7a3b;
+    font-size:20px;
+    font-weight:bold;
+    margin:8px 0;
+}
+
+.botao{
+    width:100%;
+    border:0;
+    background:#0b7a3b;
+    color:white;
+    padding:10px;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+@media(min-width:700px){
+    .produtos{
+        grid-template-columns:repeat(4,1fr);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="topo">
+        <div class="logo">🛒 Mercado Du Povo</div>
+        <button class="carrinho">🛍️ Carrinho</button>
+    </div>
+</header>
+
+<section class="banner">
+    <h1>Mercado Du Povo</h1>
+    <p>Seu mercado de bairro, agora também online.</p>
+</section>
+
+<main class="container">
+
+    <h2>Categorias</h2>
+
+    <div class="categorias">
+        <button class="categoria">Mercearia</button>
+        <button class="categoria">Bebidas</button>
+        <button class="categoria">Laticínios</button>
+        <button class="categoria">Carnes</button>
+        <button class="categoria">Hortifruti</button>
+        <button class="categoria">Padaria</button>
+        <button class="categoria">Higiene</button>
+        <button class="categoria">Limpeza</button>
+    </div>
+
+    <h2 style="margin-top:20px;">Produtos</h2>
+
+    <div class="produtos">
+
+        <div class="produto">
+            <div class="imagem">🍚</div>
+            <div class="nome">Arroz branco tipo 1</div>
+            <div class="unidade">5 kg</div>
+            <div class="preco">R$ 27,90</div>
+            <button class="botao">Adicionar</button>
+        </div>
+
+        <div class="produto">
+            <div class="imagem">🫘</div>
+            <div class="nome">Feijão carioca tipo 1</div>
+            <div class="unidade">1 kg</div>
+            <div class="preco">R$ 8,99</div>
+            <button class="botao">Adicionar</button>
+        </div>
+
+        <div class="produto">
+            <div class="imagem">🥛</div>
+            <div class="nome">Leite UHT integral</div>
+            <div class="unidade">1 L</div>
+            <div class="preco">R$ 6,49</div>
+            <button class="botao">Adicionar</button>
+        </div>
+
+        <div class="produto">
+            <div class="imagem">🥤</div>
+            <div class="nome">Refrigerante Coca-Cola</div>
+            <div class="unidade">1,5 L</div>
+            <div class="preco">R$ 7,49</div>
+            <button class="botao">Adicionar</button>
+        </div>
+
+    </div>
+
+</main>
+
+</body>
+</html>
