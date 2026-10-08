@@ -239,15 +239,40 @@ font-weight: bold;
     gap: 15px;
 }
 
-.finalizar-carrinho {
-    width: 100%;
-    border: none;
-    border-radius: 10px;
-    padding: 13px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-}  
+ /* CONTROLES DE QUANTIDADE NOS PRODUTOS */
+
+.controle-quantidade {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 14px;
+margin: 12px 0;
+}
+
+.controle-quantidade button {
+width: 44px;
+height: 44px;
+border: none;
+border-radius: 10px;
+background: #0b7a3b;
+color: white;
+font-size: 26px;
+font-weight: bold;
+cursor: pointer;
+}
+
+.controle-quantidade span {
+min-width: 28px;
+text-align: center;
+font-size: 18px;
+font-weight: bold;
+}
+
+.controle-quantidade button:active,
+.botao-quantidade:active {
+background: #075a2b;
+transform: scale(0.96);
+} 
 </style>
 </head>
 
