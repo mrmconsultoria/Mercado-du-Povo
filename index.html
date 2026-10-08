@@ -335,20 +335,27 @@ async function carregarProdutos() {
     }
 }
 
-function adicionarProduto(nome, preco) {
 
-    alert(
-        nome +
-        " foi adicionado ao carrinho por " +
-        Number(preco).toLocaleString(
-            "pt-BR",
-            {
-                style: "currency",
-                currency: "BRL"
-            }
-        )
+let carrinho = [];
+
+function adicionarProduto(nome, preco) {
+    const item = carrinho.find(
+        produto => produto.nome === nome
     );
+
+    if (item) {
+        item.quantidade++;
+    } else {
+        carrinho.push({
+            nome: nome,
+            preco: Number(preco),
+            quantidade: 1
+        });
+    }
+
+    alert(nome + " foi adicionado ao carrinho!");
 }
+
 
 carregarProdutos();
 </script>
