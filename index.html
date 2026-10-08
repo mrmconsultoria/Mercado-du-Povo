@@ -358,6 +358,44 @@ function adicionarProduto(nome, preco) {
     alert(nome + " foi adicionado ao carrinho!");
 }
 
+function atualizarContadorCarrinho() {
+    const quantidade = carrinho.reduce(
+        (total, produto) => total + produto.quantidade,
+        0
+    );
+
+    document.getElementById("quantidade-carrinho").textContent = quantidade;
+}
+
+function mostrarCarrinho() {
+    if (carrinho.length === 0) {
+        alert("Seu carrinho está vazio.");
+        return;
+    }
+
+    let mensagem = "SEU CARRINHO\n\n";
+    let total = 0;
+
+    carrinho.forEach(produto => {
+        const subtotal = produto.preco * produto.quantidade;
+        total += subtotal;
+
+        mensagem += produto.nome + " — " +
+            produto.quantidade + " unidade(s) — " +
+            subtotal.toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL"
+            }) + "\n";
+    });
+
+    mensagem += "\nTOTAL: " + total.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+    });
+
+    alert(mensagem);
+}
+
 
 carregarProdutos();
 </script>
