@@ -291,28 +291,36 @@ async function carregarProdutos() {
                 }
             );
 
-            card.innerHTML = `
-                <div class="imagem">
-                    ${emojis[categoria] || "🛒"}
-                </div>
+            
+card.innerHTML = `
+    <div class="imagem">
+        ${emojis[categoria] || "🛒"}
+    </div>
 
-                <div class="nome">
-                    ${produto.name}
-                </div>
+    <div class="nome">
+        ${produto.name}
+    </div>
 
-                <div class="unidade">
-                    ${produto.unit_label || ""}
-                </div>
+    <div class="unidade">
+        ${produto.unit_label || ""}
+    </div>
 
-                <div class="preco">
-                    ${preco}
-                </div>
+    <div class="preco">
+        ${preco}
+    </div>
 
-                <button class="botao"
-                    onclick="adicionarProduto('${produto.name.replace(/'/g, "\\'")}', ${produto.price})">
-                    Adicionar
-                </button>
-            `;
+    <div class="controle-quantidade">
+        <button type="button" onclick="alterarQuantidadeSelecionada('${produto.id}', -1)">−</button>
+        <span id="quantidade-produto-${produto.id}">1</span>
+        <button type="button" onclick="alterarQuantidadeSelecionada('${produto.id}', 1)">+</button>
+    </div>
+
+    <button class="botao"
+        onclick="adicionarProdutoSelecionado('${produto.id}', '${produto.name.replace(/'/g, "\\'")}', ${produto.price})">
+        Adicionar
+    </button>
+`;
+
 
             produtosContainer.appendChild(card);
         });
