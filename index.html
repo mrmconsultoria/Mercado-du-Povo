@@ -214,6 +214,143 @@ h2{
     </div>
 
 </main>
+<script>
+const SUPABASE_URL = "https://tkfduhnzokzcmwpehbnn.supabase.co";
 
+const SUPABASE_KEY = "sb_publishable_VW6XScrJbX75EypkuXoe-Q_4jFEbr7l";
+
+const produtosContainer = document.querySelector(".produtos");
+
+const emojis = {
+    "Mercearia": "🛒",
+    "Bebidas": "🥤",
+    "Laticínios": "🥛",
+    "Carnes": "🥩",
+    "Hortifruti": "🍎",
+    "Padaria": "🍞",
+    "Higiene": "🧴",
+    "Limpeza": "🧹"
+};
+
+async function carregarProdutos() {
+
+    try {
+
+        const resposta = await fetch(
+            SUPABASE_URL +
+            "/rest/v1/products?select=id,name,price,unit_label,category_id,description,available&order=created_at.asc",
+            {
+                headers: {
+                    "apikey": SUPABASE_KEY,
+                    "Authorization": "Bearer " + SUPABASE_KEY
+                }
+            }
+        );
+
+        if (!resposta.ok) {
+            throw new Error("Não foi possível carregar os produtos.");
+        }
+
+        const produtos = await resposta.json();
+
+        const categoriasResposta = await fetch(
+            SUPABASE_URL +
+            "/rest/v1/categories?select=id,name",
+            {
+                headers: {
+                    "apikey": SUPABASE_KEY,
+                    "Authorization": "Bearer " + SUPABASE_KEY
+                }
+            }
+        );
+
+        const categorias = await categoriasResposta.json();
+
+        const mapaCategorias = {};
+
+        categorias.forEach(categoria => {
+            mapaCategorias[categoria.id] = categoria.name;
+        });
+
+        produtos.forEach(produto => {
+
+            const categoria =
+                mapaCategorias[produto.category_id] || "Mercearia";
+
+            const card = document.createElement("div");
+
+            card.className = "produto";
+
+            const preco = Number(produto.price).toLocaleString(
+                "pt-BR",
+                {
+                    style: "currency",
+                    currency: "BRL"
+                }
+            );
+
+            card.innerHTML = `
+                <div class="imagem">
+                    ${emojis[categoria] || "🛒"}
+                </div>
+
+                <div class="nome">
+                    ${produto.name}
+                </div>
+
+                <div class="unidade">
+                    ${produto.unit_label || ""}
+                </div>
+
+                <div class="preco">
+                    ${preco}
+                </div>
+
+                <button class="botao"
+                    onclick="adicionarProduto('${produto.name.replace(/'/g, "\\'")}', ${produto.price})">
+                    Adicionar
+                </button>
+            `;
+
+            produtosContainer.appendChild(card);
+        });
+
+        console.log(
+            "Produtos carregados do Supabase:",
+            produtos.length
+        );
+
+    } catch (erro) {
+
+        console.error(erro);
+
+        const aviso = document.createElement("p");
+
+        aviso.style.padding = "20px";
+        aviso.style.color = "#b00020";
+        aviso.innerText =
+            "Não foi possível carregar os produtos do mercado.";
+
+        produtosContainer.appendChild(aviso);
+    }
+}
+
+function adicionarProduto(nome, preco) {
+
+    alert(
+        nome +
+        " foi adicionado ao carrinho por " +
+        Number(preco).toLocaleString(
+            "pt-BR",
+            {
+                style: "currency",
+                currency: "BRL"
+            }
+        )
+    );
+}
+
+carregarProdutos();
+</script>
 </body>
 </html>
