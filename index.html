@@ -349,25 +349,62 @@ card.innerHTML = `
 let carrinho = [];
 
 
-function adicionarProduto(nome, preco) {
+
+   
+let quantidadesSelecionadas = {};
+
+function alterarQuantidadeSelecionada(id, variacao) {
+    const elemento = document.getElementById(
+        "quantidade-produto-" + id
+    );
+
+    if (!elemento) return;
+
+    let quantidade = Number(elemento.textContent) || 1;
+    quantidade = Math.max(1, quantidade + variacao);
+
+    elemento.textContent = quantidade;
+    quantidadesSelecionadas[id] = quantidade;
+}
+
+function adicionarProdutoSelecionado(id, nome, preco) {
+    const elemento = document.getElementById(
+        "quantidade-produto-" + id
+    );
+
+    const quantidade = quantidadesSelecionadas[id] ||
+        (elemento ? Number(elemento.textContent) : 1) || 1;
+
+    adicionarProduto(nome, preco, quantidade);
+
+    quantidadesSelecionadas[id] = 1;
+
+    if (elemento) {
+        elemento.textContent = "1";
+    }
+}
+
+function adicionarProduto(nome, preco, quantidade = 1) {
     const item = carrinho.find(
         produto => produto.nome === nome
     );
 
     if (item) {
-        item.quantidade++;
+        item.quantidade += quantidade;
     } else {
         carrinho.push({
             nome: nome,
             preco: Number(preco),
-            quantidade: 1
+            quantidade: quantidade
         });
     }
 
     atualizarContadorCarrinho();
 
-    alert(nome + " foi adicionado ao carrinho!");
+    alert(quantidade + " unidade(s) de " + nome +
+        " adicionada(s) ao carrinho!");
 }
+ 
 
 
 function atualizarContadorCarrinho() {
