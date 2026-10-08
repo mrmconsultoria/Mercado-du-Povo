@@ -526,32 +526,94 @@ function atualizarContadorCarrinho() {
 }
 
 function mostrarCarrinho() {
-    if (carrinho.length === 0) {
-        alert("Seu carrinho está vazio.");
-        return;
-    }
+renderizarCarrinho();
 
-    let mensagem = "SEU CARRINHO\n\n";
-    let total = 0;
+document.getElementById("modal-carrinho").style.display = "flex";
 
-    carrinho.forEach(produto => {
-        const subtotal = produto.preco * produto.quantidade;
-        total += subtotal;
+}
 
-        mensagem += produto.nome + " — " +
-            produto.quantidade + " unidade(s) — " +
-            subtotal.toLocaleString("pt-BR", {
-                style: "currency",
-                currency: "BRL"
-            }) + "\n";
-    });
+function fecharCarrinho() {
+document.getElementById("modal-carrinho").style.display = "none";
+}
 
-    mensagem += "\nTOTAL: " + total.toLocaleString("pt-BR", {
-        style: "currency",
-        currency: "BRL"
-    });
+function alterarQuantidadeCarrinho(indice, variacao) {
+if (!carrinho[indice]) return;
 
-    alert(mensagem);
+carrinho[indice].quantidade += variacao;
+
+if (carrinho[indice].quantidade <= 0) {
+    carrinho.splice(indice, 1);
+}
+
+atualizarContadorCarrinho();
+renderizarCarrinho();
+
+}
+
+function renderizarCarrinho() {
+const lista = document.getElementById("itens-carrinho");
+const totalElemento = document.getElementById("total-carrinho");
+const botaoFinalizar = document.querySelector(".finalizar-carrinho");
+
+let total = 0;
+
+if (carrinho.length === 0) {
+    lista.innerHTML = `
+        <p class="carrinho-vazio" style="text-align:center;padding:25px 5px;color:#777;">
+            Seu carrinho está vazio.
+        </p>
+    `;
+
+    totalElemento.textContent = "R$ 0,00";
+    botaoFinalizar.disabled = true;
+    botaoFinalizar.style.opacity = "0.5";
+    return;
+}
+
+botaoFinalizar.disabled = false;
+botaoFinalizar.style.opacity = "1";
+
+lista.innerHTML = carrinho.map((produto, indice) => {
+    const subtotal = produto.preco * produto.quantidade;
+    total += subtotal;
+
+    return `
+        <div class="item-carrinho">
+            <div style="flex:1;min-width:0;">
+                <div style="font-weight:bold;margin-bottom:5px;">
+                    ${produto.nome}
+                </div>
+
+                <div style="color:#0b7a3b;font-weight:bold;">
+                    ${subtotal.toLocaleString("pt-BR", {
+                        style: "currency",
+                        currency: "BRL"
+                    })}
+                </div>
+            </div>
+
+            <div class="controles-carrinho">
+                <button type="button"
+                    class="botao-quantidade"
+                    onclick="alterarQuantidadeCarrinho(${indice}, -1)">−</button>
+
+                <span class="quantidade-carrinho-item">
+                    ${produto.quantidade}
+                </span>
+
+                <button type="button"
+                    class="botao-quantidade"
+                    onclick="alterarQuantidadeCarrinho(${indice}, 1)">+</button>
+            </div>
+        </div>
+    `;
+}).join("");
+
+totalElemento.textContent = total.toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL"
+});
+
 }
 
 
