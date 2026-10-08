@@ -340,6 +340,7 @@ async function carregarProdutos() {
 
 let carrinho = [];
 
+
 function adicionarProduto(nome, preco) {
     const item = carrinho.find(
         produto => produto.nome === nome
@@ -355,8 +356,11 @@ function adicionarProduto(nome, preco) {
         });
     }
 
+    atualizarContadorCarrinho();
+
     alert(nome + " foi adicionado ao carrinho!");
 }
+
 
 function atualizarContadorCarrinho() {
     const quantidade = carrinho.reduce(
