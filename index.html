@@ -797,11 +797,11 @@ function revisarPedido() {
     let subtotal = 0;
 
     carrinho.forEach(item => {
-        const quantidade = Number(item.quantity ?? item.quantidade ?? 0);
-        const preco = Number(item.price ?? item.preco ?? item.unit_price ?? 0);
-        const totalItem = quantidade * preco;
+    const quantidade = Number(item.quantidade) || 0;
+    const preco = Number(item.preco) || 0;
+    const totalItem = quantidade * preco;
 
-        subtotal += totalItem;
+    subtotal += totalItem;
 
         const linha = document.createElement("p");
         linha.textContent = `${item.name ?? item.nome ?? item.product_name} — ${quantidade} × ${preco.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })} = ${totalItem.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}`;
