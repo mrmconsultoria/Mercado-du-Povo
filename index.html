@@ -303,6 +303,82 @@ transform: scale(0.96);
 
     </div>
 </div>
+<!-- TELA DE DADOS DO CLIENTE --><div id="tela-finalizacao" style="display:none;position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,0.65);padding:15px;overflow-y:auto;">
+    <div style="background:white;max-width:500px;margin:20px auto;border-radius:15px;padding:20px;">    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <h2 style="margin:0;">Finalizar Pedido</h2>
+        <button type="button" onclick="fecharFinalizacao()" style="border:0;background:none;font-size:30px;cursor:pointer;">×</button>
+    </div>
+
+    <p style="margin-bottom:18px;color:#555;">Preencha seus dados para continuar com o pedido.</p>
+
+    <form id="formulario-cliente">
+
+        <label for="cliente-nome">Nome completo *</label>
+        <input id="cliente-nome" name="nome" type="text" autocomplete="name" required
+            style="width:100%;padding:12px;margin:6px 0 15px;border:1px solid #ccc;border-radius:8px;">
+
+        <label for="cliente-telefone">Telefone / WhatsApp *</label>
+        <input id="cliente-telefone" name="telefone" type="tel" autocomplete="tel" required
+            style="width:100%;padding:12px;margin:6px 0 15px;border:1px solid #ccc;border-radius:8px;">
+
+        <label for="tipo-entrega">Como deseja receber? *</label>
+        <select id="tipo-entrega" name="entrega" required
+            style="width:100%;padding:12px;margin:6px 0 15px;border:1px solid #ccc;border-radius:8px;background:white;">
+            <option value="">Selecione</option>
+            <option value="delivery">Receber em casa</option>
+            <option value="pickup">Retirar no mercado</option>
+        </select>
+
+        <div id="dados-endereco">
+
+            <label for="cliente-cep">CEP (opcional)</label>
+            <input id="cliente-cep" name="cep" type="text" autocomplete="postal-code"
+                style="width:100%;padding:12px;margin:6px 0 15px;border:1px solid #ccc;border-radius:8px;">
+
+            <label for="cliente-endereco">Rua / Avenida *</label>
+            <input id="cliente-endereco" name="endereco" type="text" autocomplete="street-address"
+                style="width:100%;padding:12px;margin:6px 0 15px;border:1px solid #ccc;border-radius:8px;">
+
+            <label for="cliente-numero">Número *</label>
+            <input id="cliente-numero" name="numero" type="text" required
+                style="width:100%;padding:12px;margin:6px 0 15px;border:1px solid #ccc;border-radius:8px;">
+
+            <label for="cliente-complemento">Complemento</label>
+            <input id="cliente-complemento" name="complemento" type="text"
+                style="width:100%;padding:12px;margin:6px 0 15px;border:1px solid #ccc;border-radius:8px;">
+
+            <label for="cliente-bairro">Bairro *</label>
+            <input id="cliente-bairro" name="bairro" type="text" autocomplete="address-level3" required
+                style="width:100%;padding:12px;margin:6px 0 15px;border:1px solid #ccc;border-radius:8px;">
+
+            <label for="cliente-referencia">Ponto de referência</label>
+            <input id="cliente-referencia" name="referencia" type="text"
+                style="width:100%;padding:12px;margin:6px 0 15px;border:1px solid #ccc;border-radius:8px;">
+
+        </div>
+
+        <label for="forma-pagamento">Forma de pagamento *</label>
+        <select id="forma-pagamento" name="pagamento" required
+            style="width:100%;padding:12px;margin:6px 0 15px;border:1px solid #ccc;border-radius:8px;background:white;">
+            <option value="">Selecione</option>
+            <option value="pix">Pix</option>
+            <option value="dinheiro">Dinheiro</option>
+            <option value="cartao">Cartão na entrega/retirada</option>
+        </select>
+
+        <label for="cliente-observacoes">Observações do pedido</label>
+        <textarea id="cliente-observacoes" name="observacoes" rows="3"
+            style="width:100%;padding:12px;margin:6px 0 20px;border:1px solid #ccc;border-radius:8px;resize:vertical;"></textarea>
+
+        <button type="submit" style="width:100%;padding:14px;border:0;border-radius:8px;background:#0b7a3b;color:white;font-size:16px;font-weight:bold;cursor:pointer;">
+            Continuar
+        </button>
+
+    </form>
+</div>
+
+</div>
+<!-- FIM DA TELA DE DADOS DO CLIENTE -->
 <section class="banner">
     <h1>Mercado Du Povo</h1>
     <p>Seu mercado de bairro, agora também online.</p>
