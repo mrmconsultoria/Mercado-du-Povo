@@ -804,7 +804,7 @@ function revisarPedido() {
     subtotal += totalItem;
 
         const linha = document.createElement("p");
-        linha.textContent = `${item.name ?? item.nome ?? item.product_name} — ${quantidade} × ${preco.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })} = ${totalItem.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}`;
+        linha.textContent = `${item.nome} — ${quantidade} × ${preco.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })} = ${totalItem.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}`;
         lista.appendChild(linha);
     });
 
