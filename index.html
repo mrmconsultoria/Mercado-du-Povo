@@ -761,6 +761,66 @@ function abrirFinalizacao() {
 function fecharFinalizacao() {
     document.getElementById("tela-finalizacao").style.display = "none";
 }
+   function voltarParaFormulario() {
+    document.getElementById("area-revisao-pedido").style.display = "none";
+    document.getElementById("formulario-cliente").style.display = "block";
+}
+
+function revisarPedido() {
+    const formulario = document.getElementById("formulario-cliente");
+
+    if (!formulario.reportValidity()) {
+        return;
+    }
+
+    if (!carrinho || carrinho.length === 0) {
+        alert("Seu carrinho está vazio. Adicione pelo menos um produto.");
+        return;
+    }
+
+    const dados = new FormData(formulario);
+    const nome = dados.get("nome");
+    const telefone = dados.get("telefone");
+    const entrega = dados.get("entrega");
+    const pagamento = dados.get("pagamento");
+
+    document.getElementById("resumo-dados-cliente").innerHTML = `
+        <p><strong>Nome:</strong> ${nome}</p>
+        <p><strong>Telefone:</strong> ${telefone}</p>
+        <p><strong>Entrega:</strong> ${entrega === "delivery" ? "Receber em casa" : "Retirar no mercado"}</p>
+        <p><strong>Pagamento:</strong> ${pagamento}</p>
+    `;
+
+    const lista = document.getElementById("resumo-produtos-pedido");
+    lista.innerHTML = "";
+
+    let subtotal = 0;
+
+    carrinho.forEach(item => {
+        const quantidade = Number(item.quantity ?? item.quantidade ?? 0);
+        const preco = Number(item.price ?? item.preco ?? item.unit_price ?? 0);
+        const totalItem = quantidade * preco;
+
+        subtotal += totalItem;
+
+        const linha = document.createElement("p");
+        linha.textContent = `${item.name ?? item.nome ?? item.product_name} — ${quantidade} × ${preco.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })} = ${totalItem.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}`;
+        lista.appendChild(linha);
+    });
+
+    document.getElementById("resumo-subtotal").textContent =
+        subtotal.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+
+    document.getElementById("resumo-taxa-entrega").textContent =
+        entrega === "delivery" ? "A confirmar" : "R$ 0,00";
+
+    document.getElementById("resumo-total-pedido").textContent =
+        entrega === "delivery" ? "A confirmar" :
+        subtotal.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+
+    formulario.style.display = "none";
+    document.getElementById("area-revisao-pedido").style.display = "block";
+} 
 carregarProdutos();
 </script>
 </body>
