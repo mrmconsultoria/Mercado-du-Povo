@@ -729,7 +729,14 @@ totalElemento.textContent = total.toLocaleString("pt-BR", {
 
 }
 
+function abrirFinalizacao() {
+    document.getElementById("modal-carrinho").style.display = "none";
+    document.getElementById("tela-finalizacao").style.display = "block";
+}
 
+function fecharFinalizacao() {
+    document.getElementById("tela-finalizacao").style.display = "none";
+}
 carregarProdutos();
 </script>
 </body>
